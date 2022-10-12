@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Desa extends Model
+class Puskesmas extends Model
 {
-    protected $table = 'desa';
-    protected $guarded = [];
     use HasFactory;
-
-     /**
-     * Get the kecamatan that owns the Project
+    protected $table = 'puskesmas';
+    protected $guarded = [];
+    /**
+     * Get the desa that owns the Puskesmas
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function Kecamatan()
+    public function desa()
     {
-        return $this->belongsTo(Kecamatan::class, 'id_kecamatan');
+        return $this->belongsTo(Desa::class, 'id_desa' );
     }
 }
-

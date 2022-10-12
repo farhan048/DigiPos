@@ -1,22 +1,23 @@
 @extends('admin.layouts.app')
-@section('title', 'Desa')
+@section('title', 'Posyandu')
 @section('main-content')
     <x-page-layout>
-        @slot('pageTitle')Desa @endslot
+        @slot('pageTitle')Posyandu @endslot
         @slot('breadcrumb')
         <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Data Desa</li>
+        <li class="breadcrumb-item active">Data Posyandu</li>
         @endslot
 
-        @slot('title')Data Desa @endslot
+        @slot('title')Data Posyandu @endslot
         @slot('button')           
-        <button class="btn btn-outline-primary mb-3" onclick="create()"><i class="fas fa-plus"></i> Tambah Data Desa</button>
+        <button class="btn btn-outline-primary mb-3" onclick="create()"><i class="fas fa-plus"></i> Tambah Data Posyandu</button>
         @endslot
         @slot('table')
         <x-dataTables>
             @slot('columns')
-            <th>Nama Desa</th>
-            <th>Nama Kecamatan</th>
+            <th>RW</th>
+            <th>Nama Posyandu</th>
+            <th>Alamat</th>
             <th>Action</th>
             @endslot
         </x-dataTables>
@@ -33,15 +34,33 @@
                 @csrf
                 <input type="hidden" name="id" id="id">
                 <div class="form-group">
-                    <label for="village">Nama Desa</label>
-                    <input type="text" class="form-control" id="village" placeholder="Masukan Nama Kecamatan">
-                  </div>
+                    <label for="puskesmas">Puskesmas</label>
+                    <input type="text" class="form-control" id="puskesmas" placeholder="Masukan Puskesmas">
+                </div>
+                <div class="form-group">
+                    <label for="rw">RW</label>
+                    <input type="text" class="form-control" id="rw" placeholder="Masukan Rw">
+                </div>
+                <div class="form-group">
+                    <label for="address" class="control-label">Alamat</label>
+                    <textarea class="form-control" name="address" id="address" cols="30" rows="5"></textarea>
+                    <div id="addressHelp" class="form-text">Masukan alamat tanpa mengisikan nama Desa dan Kecamatan</div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Desa</label>
+                    <select name="desa_id" id="desa_id" class="form-control" style="width: 100%;">
+                        <option selected value="">--Pilih desa--</option>
+                       @foreach ($desa as $item)
+                       <option value="{{$item->id}}">{{$item->nama_desa}}</option>
+                       @endforeach
+                    </select>
+                </div>
                   <div class="form-group">
-                    <label class="control-label">Kecamatan</label>
-                    <select name="kecamatan_id" id="kecamatan_id" class="form-control" style="width: 100%;">
-                        <option selected value="">--Pilih Kecamatan--</option>
-                       @foreach ($kecamatan as $item)
-                       <option value="{{$item->id}}">{{$item->nama_kecamatan}}</option>
+                    <label class="control-label">puskesmas</label>
+                    <select name="puskesmas_id" id="puskesmas_id" class="form-control" style="width: 100%;">
+                        <option selected value="">--Pilih Puskesmas--</option>
+                       @foreach ($puskesmas as $item)
+                       <option value="{{$item->id}}">Puskesmas {{$item->nama_puskesmas}}</option>
                        @endforeach
                     </select>
                 </div>
@@ -50,21 +69,9 @@
         @endslot
     </x-page-layout>
 @endsection
-@push('css')
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-@endpush
 @push('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script>
-    $(document).ready(function() {
-        $('#kecamatan_id').select2({
-    placeholder: "--Pilih Kecamatan--",
-      allowClear: true
-        });
-});
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     var table = $('#datatables').DataTable({
         processing: true,
@@ -73,24 +80,11 @@
         ajax: "",
         columns: [
             { data: 'DT_RowIndex', searchable: false, orderable: false},
-            { data: 'Desa', name: 'nama_desa'},
-            { data: 'Kecamatan', name: 'Kecamatan'},
+            { data: 'Puskesmas', name: 'nama_puskesmas'},
+            { data: 'alamat', name: 'alamat'},
+            { data: 'desa', name: 'desa'},
             { data: 'action', name: 'action', searchable: false, orderable: false}
-            ],
-        columnDefs: [
-            {
-                "targets": 1,
-                "className": "text-center",
-            },
-            {
-                "targets": 2,
-                "className": "text-center",
-            },
-            {
-                "targets": 3,
-                "className": "text-center",
-            },
-        ]
+            ]
     })
 </script>
 <script>
@@ -100,7 +94,7 @@
             $('.form-group').removeClass('has-error'); // clear error class
             $('.help-block').empty(); // clear error string
             $('#modal_form').modal('show'); // show bootstrap modal
-            $('.modal-title').text('Tambah Data Desa');
+            $('.modal-title').text('Tambah Data Puskesmas');
             $('#id').val('');
   
     }
@@ -110,40 +104,42 @@
             $('.form-group').removeClass('has-error'); // clear error class
             $('.help-block').empty(); // clear error string
 
-            var url = "{{ route('desa.edit',":id") }}";
+            var url = "{{ route('puskesmas.edit',":id") }}";
             url = url.replace(':id', id);
             
             $.get(url, function (data) {
-                $('#village').val(data.data.nama_desa);
-                $('#kecamatan_id').val(data.data.id_kecamatan);
+                $('#puskesmas').val(data.data.nama_puskesmas);
+                $('#address').val(data.data.alamat);
                 $('#id').val(data.data.id);
                 $('#modal_form').modal('show');
-                $('.modal-title').text('Edit Data Desa');
+                $('.modal-title').text('Edit Data Puskesmas');
             });
         }
         function submit() {
-            var id               = $('#id').val();
-            var nama_desa        = $('#village').val();
-            var id_kecamatan     = $('#kecamatan_id').val();
+            var id             = $('#id').val();
+            var nama_puskesmas = $('#puskesmas').val();
+            var alamat         = $('#address').val();
+            var desa        = $('#desa_id').val();
             $('#btnSave').text('Menyimpan...');
             $('#btnSave').attr('disabled', true);
             var pesan;
 
             if(submit_method == 'create') {
-                pesan ='Data Desa berhasil ditambahkan';
+                pesan ='Data Puskesmas berhasil ditambahkan';
             } else {
-                pesan ='Data Desa berhasil diperbaharui';
+                pesan ='Data Puskesmas berhasil diperbaharui';
             }
 
             $.ajax({
-                url: "{{ route('desa.store') }}",
+                url: "{{ route('puskesmas.store') }}",
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     "_token": "{{ csrf_token() }}",
                     id: id,
-                    nama_desa: nama_desa,
-                    id_kecamatan: id_kecamatan
+                    nama_puskesmas: nama_puskesmas,
+                    alamat: alamat,
+                    id_desa : desa
                 },
                 success: function (data) {
                     if(data.status) {
@@ -191,7 +187,7 @@
             });
         }
         function destroy(id) {
-            var url = "{{ route('desa.destroy',":id") }}";
+            var url = "{{ route('puskesmas.destroy',":id") }}";
             url = url.replace(':id', id);
         $.ajaxSetup({
             headers: {

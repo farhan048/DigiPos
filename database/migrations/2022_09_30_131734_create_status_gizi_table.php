@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('posyandu', function (Blueprint $table) {
-            $table->id();
-            $table->char('nama_posyandu',50); 
-            $table->char('rt',5)->nullable(); 
-            $table->char('rw',5); 
-            $table->unsignedInteger('id_puskesmas');
-            $table->foreign('id')->references('id')->on('puskesmas');
+        Schema::create('status_gizi', function (Blueprint $table) {
+            $table->increments('id_status_gizi');
+            $table->string('bb_u');
+            $table->string('pb_tb_u');
+            $table->string('bb_pb_tb');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posyandu');
+        Schema::dropIfExists('status_gizi');
     }
 };

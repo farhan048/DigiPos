@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('kecamatan', function (Blueprint $table) {
             $table->id();
             $table->char('nama_kecamatan',60);
-            $table->char('kodepos',7);
+            $table->char('kodepos',10);
             $table->timestamps();
             $table->softDeletes();
         });

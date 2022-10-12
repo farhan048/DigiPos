@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('imunisasi', function (Blueprint $table) {
             $table->id();
+            $table->date('tgl_imunisasi');
+            $table->foreignId('id_jenis')->constrained('jenis_imunisasi');
+            $table->foreignId('id_pasien')->constrained('pasien');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreDesaRequest extends FormRequest
+class StorePosyanduRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class StoreDesaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nama_desa' => 'required|string',
-            'id_kecamatan' => 'required',
+            'nama_posyandu' => 'required',
+            'rw' => 'required',
+            'id_puskesmas' => 'required',
         ];
     }
 }

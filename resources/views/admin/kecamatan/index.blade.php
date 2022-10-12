@@ -59,29 +59,35 @@
             { data: 'nama_kecamatan', name: 'nama_kecamatan'},
             { data: 'kode_pos', name: 'kode_pos'},
             { data: 'action', name: 'action', searchable: false, orderable: false}
-            ]
+            ],
+        columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },
+            {
+                "targets": 1,
+                "className": "text-center",
+            },
+            {
+                "targets": 2,
+                "className": "text-center",
+            },
+            {
+                "targets": 3,
+                "className": "text-center",
+            },
+        ]
     })
 </script>
 <script>
     function create(){
         submit_method = 'create';
-            // $('#form')[0].reset();
-            // $('.form-group').removeClass('has-error'); // clear error class
-            // $('.help-block').empty(); // clear error string
-            $('#modal_form').modal('show'); // show bootstrap modal
-            $('.modal-title').text('Tambah Data Kecamatan');
-            $('#id').val('');
-  
-    }
-</script>
-<script>
-    function create(){
-        submit_method = 'create';
-            // $('#form')[0].reset();
+             $('#form')[0].reset();
             $('.form-group').removeClass('has-error'); // clear error class
             $('.help-block').empty(); // clear error string
             $('#modal_form').modal('show'); // show bootstrap modal
-            $('.modal-title').text('Tambah Data Client');
+            $('.modal-title').text('Tambah Data Kecamatan');
             $('#id').val('');
   
     }
@@ -99,13 +105,13 @@
                 $('#poscode').val(data.data.kodepos);
                 $('#id').val(data.data.id);
                 $('#modal_form').modal('show');
-                $('.modal-title').text('Edit Data Client');
+                $('.modal-title').text('Edit Data Kecamatan');
             });
         }
         function submit() {
-            var id         = $('#id').val();
+            var id               = $('#id').val();
             var nama_kecamatan   = $('#district').val();
-            var kode_pos    = $('#poscode').val();
+            var kode_pos         = $('#poscode').val();
             $('#btnSave').text('Menyimpan...');
             $('#btnSave').attr('disabled', true);
             var pesan;

@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\DesaController;
+use App\Http\Controllers\PuskesmasController;
+use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\KeluargaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +18,11 @@ use App\Http\Controllers\KecamatanController;
 */
 
 Route::resource('kecamatan', KecamatanController::class)->except(['create','show','update']);
-Route::get('/desa', function () {
-    return view('admin.desa.index');
-});
+Route::resource('desa', DesaController::class)->except(['create','show','update']);
+Route::resource('puskesmas', PuskesmasController::class)->except(['create','show','update']);
+Route::resource('posyandu', PosyanduController::class)->except(['create','show','update']);
+Route::resource('keluarga', PuskesmasController::class)->except(['create','show','update']);
+
 Route::get('/profile', function () {
     return view('admin.profile');
 });
@@ -25,7 +31,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    return view('admin.dashboard');
+})->name('dashboard');
 
 require __DIR__.'/auth.php';

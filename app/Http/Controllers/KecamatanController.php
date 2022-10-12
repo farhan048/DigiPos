@@ -27,12 +27,12 @@ class KecamatanController extends Controller
             return $row->kodepos;
         })
         ->addColumn('action', function ($row) {
-            $edit = '<a href="javascript:void(0)" onclick="edit('.$row->id.')" class="btn btn-outline-primary btn-xs inline">EDIT</a>'; 
-            $delete = '<a href="javascript:void(0)" onclick="destroy('.$row->id.')" class="btn btn-outline-danger btn-xs">HAPUS</a>';
+            $edit = '<a href="javascript:void(0)" onclick="edit('.$row->id.')" class="btn btn-outline-primary"><i class="fas fa-edit"></i></a>'; 
+            $delete = '<a href="javascript:void(0)" onclick="destroy('.$row->id.')" class="btn btn-outline-danger mx-1"><i class="fas fa-trash"></i></a>';
             return $edit.$delete;
         })
         ->rawColumns(['nama_kecamatan', 'kode_pos', 'action'])
-        ->make(true);
+        ->make();
        }
        return view ('admin.kecamatan.index');
     }
@@ -81,7 +81,10 @@ class KecamatanController extends Controller
      */
     public function edit(Kecamatan $kecamatan)
     {
-        //
+        
+        return response()->json([
+            'data'  => $kecamatan
+        ]);
     }
 
     /**

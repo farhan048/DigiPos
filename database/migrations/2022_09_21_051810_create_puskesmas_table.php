@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_puskesmas');
             $table->text('alamat');
-            $table->unsignedInteger('id_desa');
-            $table->foreign('id')->references('id')->on('desa');
+            $table->foreignId('id_desa')->constrained('desa');
             $table->timestamps();
             $table->softDeletes();
         });

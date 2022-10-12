@@ -21,10 +21,9 @@ return new class extends Migration
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->char('no_telp', 13);
-            $table->enum('status_ekonomi', ['1', '2']);
+            $table->enum('status_ekonomi', ['1', '2'])->nullable();
             $table->text('alamat');
-            $table->unsignedInteger('id_desa');
-            $table->foreign('id')->references('id')->on('desa');
+            $table->foreignId('id_desa')->constrained('desa');
             $table->timestamps();
             $table->softDeletes();
         });

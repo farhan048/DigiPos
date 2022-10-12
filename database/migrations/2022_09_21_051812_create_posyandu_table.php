@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('desa', function (Blueprint $table) {
+        Schema::create('posyandu', function (Blueprint $table) {
             $table->id();
-            $table->char('nama_desa',50);
-            $table->foreignId('id_kecamatan')->constrained('kecamatan');
+            $table->char('nama_posyandu',50); 
+            $table->char('rt',5)->nullable(); 
+            $table->char('rw',5); 
+            $table->foreignId('id_desa')->constrained('desa');
+            $table->foreignId('id_puskesmas')->constrained('puskesmas');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desa');
+        Schema::dropIfExists('posyandu');
     }
 };

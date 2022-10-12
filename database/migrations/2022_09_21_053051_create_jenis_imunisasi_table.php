@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('jenis_imunisasi', function (Blueprint $table) {
             $table->id();
-            $table->char('nama_imunisasi',50);
+            $table->char('jenis_imunisasi',50);
             $table->timestamps();
             $table->softDeletes();
         });
