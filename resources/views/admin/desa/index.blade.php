@@ -79,6 +79,10 @@
             ],
         columnDefs: [
             {
+                "targets": 0,
+                "className": "text-center",
+            },
+            {
                 "targets": 1,
                 "className": "text-center",
             },
@@ -183,7 +187,7 @@
                             title: 'ERROR !',
                             text: error_message,
                             showConfirmButton: false,
-                            timer: 2000
+                            timer: 3000
                         });
                     $('#btnSave').text('Simpan');
                     $('#btnSave').attr('disabled', false);

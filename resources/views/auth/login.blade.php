@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in (v2)</title>
+  <title>{{config ('app.name', 'Laravel')}} | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,9 +17,9 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
+  <div class="card card-outline card-danger">
     <div class="card-header text-center">
-      <img src="{{asset('img/AdminLTELogo.png')}}" alt="">
+      <img src="{{asset('assets/img/logo.jfif')}}" alt="">
       <p class="login-box-msg">Login Untuk Memulai</p>
     </div>
     <div class="card-body">
@@ -60,7 +60,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Log In</button>
+            <button type="submit" class="btn btn-success btn-block">Log In</button>
           </div>
           <!-- /.col -->
         </div>

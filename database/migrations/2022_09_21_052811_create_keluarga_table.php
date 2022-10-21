@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('keluarga', function (Blueprint $table) {
             $table->id();
             $table->char('no_kk',16);
-            $table->char('nik_ayah',16);
-            $table->char('nik_ibu',16);
+            $table->char('nik_ayah',16)->nullable();
+            $table->char('nik_ibu',16)->nullable();
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->char('no_telp', 13);

@@ -5,7 +5,7 @@ use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\DesaController;
 use App\Http\Controllers\PuskesmasController;
 use App\Http\Controllers\PosyanduController;
-use App\Http\Controllers\KeluargaController;
+use App\Http\Controllers\JenisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +21,7 @@ Route::resource('kecamatan', KecamatanController::class)->except(['create','show
 Route::resource('desa', DesaController::class)->except(['create','show','update']);
 Route::resource('puskesmas', PuskesmasController::class)->except(['create','show','update']);
 Route::resource('posyandu', PosyanduController::class)->except(['create','show','update']);
-Route::resource('keluarga', PuskesmasController::class)->except(['create','show','update']);
+Route::resource('jenis-imunisasi', JenisController::class)->except(['create','show','update']);
 
 Route::get('/profile', function () {
     return view('admin.profile');

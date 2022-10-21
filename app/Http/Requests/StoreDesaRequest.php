@@ -28,4 +28,17 @@ class StoreDesaRequest extends FormRequest
             'id_kecamatan' => 'required',
         ];
     }
+    
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'nama_desa.required' => 'Nama Desa Tidak Boleh Kosong',
+            'id_kecamatan.required' => 'Kecamatan Tidak Boleh Kosong',
+        ];
+    }
 }

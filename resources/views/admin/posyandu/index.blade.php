@@ -17,7 +17,9 @@
             @slot('columns')
             <th>RW</th>
             <th>Nama Posyandu</th>
-            <th>Alamat</th>
+            <th>Ketua Posyandu</th>
+            <th>Desa</th>
+            <th>Total Pasien</th>
             <th>Action</th>
             @endslot
         </x-dataTables>
@@ -34,24 +36,19 @@
                 @csrf
                 <input type="hidden" name="id" id="id">
                 <div class="form-group">
-                    <label for="puskesmas">Puskesmas</label>
-                    <input type="text" class="form-control" id="puskesmas" placeholder="Masukan Puskesmas">
+                    <label for="posyandu">Posyandu</label>
+                    <input type="text" class="form-control" id="posyandu" placeholder="Masukan Nama Posyandu">
                 </div>
                 <div class="form-group">
                     <label for="rw">RW</label>
-                    <input type="text" class="form-control" id="rw" placeholder="Masukan Rw">
-                </div>
-                <div class="form-group">
-                    <label for="address" class="control-label">Alamat</label>
-                    <textarea class="form-control" name="address" id="address" cols="30" rows="5"></textarea>
-                    <div id="addressHelp" class="form-text">Masukan alamat tanpa mengisikan nama Desa dan Kecamatan</div>
+                    <input type="text" class="form-control" id="rw" placeholder="Masukan Nomer RW">
                 </div>
                 <div class="form-group">
                     <label class="control-label">Desa</label>
                     <select name="desa_id" id="desa_id" class="form-control" style="width: 100%;">
                         <option selected value="">--Pilih desa--</option>
                        @foreach ($desa as $item)
-                       <option value="{{$item->id}}">{{$item->nama_desa}}</option>
+                       <option value="{{$item->id}}">Desa {{$item->nama_desa}}</option>
                        @endforeach
                     </select>
                 </div>
@@ -80,8 +77,8 @@
         ajax: "",
         columns: [
             { data: 'DT_RowIndex', searchable: false, orderable: false},
-            { data: 'Puskesmas', name: 'nama_puskesmas'},
-            { data: 'alamat', name: 'alamat'},
+            { data: 'RW', name: 'rw'},
+            { data: 'Posyandu', name: 'nama_posyandu'},
             { data: 'desa', name: 'desa'},
             { data: 'action', name: 'action', searchable: false, orderable: false}
             ]
@@ -94,7 +91,7 @@
             $('.form-group').removeClass('has-error'); // clear error class
             $('.help-block').empty(); // clear error string
             $('#modal_form').modal('show'); // show bootstrap modal
-            $('.modal-title').text('Tambah Data Puskesmas');
+            $('.modal-title').text('Tambah Data Posyandu');
             $('#id').val('');
   
     }
@@ -104,41 +101,43 @@
             $('.form-group').removeClass('has-error'); // clear error class
             $('.help-block').empty(); // clear error string
 
-            var url = "{{ route('puskesmas.edit',":id") }}";
+            var url = "{{ route('posyandu.edit',":id") }}";
             url = url.replace(':id', id);
             
             $.get(url, function (data) {
-                $('#puskesmas').val(data.data.nama_puskesmas);
-                $('#address').val(data.data.alamat);
+                $('#puskesmas').val(data.data.nama_posyandu);
+                $('#rw').val(data.data.rw);
                 $('#id').val(data.data.id);
                 $('#modal_form').modal('show');
-                $('.modal-title').text('Edit Data Puskesmas');
+                $('.modal-title').text('Edit Data Posyandu');
             });
         }
         function submit() {
-            var id             = $('#id').val();
-            var nama_puskesmas = $('#puskesmas').val();
-            var alamat         = $('#address').val();
+            var id          = $('#id').val();
+            var posyandu    = $('#posyandu').val();
+            var rw          = $('#rw').val();
+            var puskesmas   = $('#puskesmas_id').val();
             var desa        = $('#desa_id').val();
             $('#btnSave').text('Menyimpan...');
             $('#btnSave').attr('disabled', true);
             var pesan;
 
             if(submit_method == 'create') {
-                pesan ='Data Puskesmas berhasil ditambahkan';
+                pesan ='Data Posyandu berhasil ditambahkan';
             } else {
-                pesan ='Data Puskesmas berhasil diperbaharui';
+                pesan ='Data Posyandu berhasil diperbaharui';
             }
 
             $.ajax({
-                url: "{{ route('puskesmas.store') }}",
+                url: "{{ route('posyandu.store') }}",
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     "_token": "{{ csrf_token() }}",
                     id: id,
-                    nama_puskesmas: nama_puskesmas,
-                    alamat: alamat,
+                    nama_posyandu: posyandu,
+                    rw: rw,
+                    id_puskesmas : puskesmas,
                     id_desa : desa
                 },
                 success: function (data) {
@@ -187,7 +186,7 @@
             });
         }
         function destroy(id) {
-            var url = "{{ route('puskesmas.destroy',":id") }}";
+            var url = "{{ route('posyandu.destroy',":id") }}";
             url = url.replace(':id', id);
         $.ajaxSetup({
             headers: {

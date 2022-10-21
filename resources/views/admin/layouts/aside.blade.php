@@ -1,7 +1,7 @@
-<aside class="main-sidebar sidebar-ligth-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="{{url('/dashboard')}}" class="brand-link">
+      <img src="{{asset('assets/img/logo.jfif')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">DigiPosyandu</span>
     </a>
 
@@ -13,7 +13,7 @@
           
         </div>
         <div class="info">
-          <a href="#" class="d-block">Nama Buat Profile</a>
+          <a href="{{url('/profile')}}" class="d-block">Nama Buat Profile</a>
         </div>
         <div class="info d-flex ml-auto">
           <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="d-block text-danger"><i class="fas fa-sign-out-alt"></i></a>
@@ -48,12 +48,6 @@
                     <p>Data Pemeriksaan Gizi</p>
                   </a>
                 </li>
-                {{-- <li class="nav-item">
-                  <a href="pages/mailbox/compose.html" class="nav-link">
-                    <i class="fas fa-history nav-icon"></i>
-                    <p>Riwayat</p>
-                  </a>
-                </li> --}}
               </ul>
             </li>
           </li>
@@ -67,26 +61,26 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
+                <a href="{{url('imunisasi')}}" class="nav-link">
                   <i class="fas fa-notes-medical nav-icon"></i>
                   <p>Data Imunisasi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
+                <a href="{{url ('jenis-imunisasi')}}" class="nav-link">
                   <i class="fas fa-list-alt nav-icon"></i>
                   <p>Jenis Imunisasi</p>
                 </a>
               </li>
-              {{-- <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <i class="fas fa-history nav-icon"></i>
-                  <p>Riwayat</p>
-                </a>
-              </li> --}}
             </ul>
           </li>
           <li class="nav-header">Data Master</li>
+          <li class="nav-item">
+            <a href="{{url('pasien')}}" class="nav-link">
+              <i class="fas fa-id-card nav-icon"></i>
+              <p>Data Pasien</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-clinic-medical"></i>
@@ -174,29 +168,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-child"></i>
-              <p>
-                Pasien
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{url('pasien')}}" class="nav-link">
-                  <i class="fas fa-id-card nav-icon"></i>
-                  <p>Data Pasien</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <i class="fas fa-file-alt nav-icon"></i>
-                  <p>Data Keluarga</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

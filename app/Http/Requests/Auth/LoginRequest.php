@@ -90,4 +90,17 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email Tidak Boleh Kosong',
+            'password.required' => 'Password Tidak Boleh Kosong',
+        ];
+    }
 }

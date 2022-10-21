@@ -6,7 +6,8 @@ use App\Models\Posyandu;
 use App\Models\Puskesmas;
 use App\Models\Desa;
 use Yajra\DataTables\DataTables;
-use Illuminate\Http\Request\StorePosyanduRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\StorePosyanduRequest;
 
 class PosyanduController extends Controller
 {
@@ -17,6 +18,7 @@ class PosyanduController extends Controller
      */
     public function index()
     {
+        
        $puskesmas = Puskesmas::all();
        $desa = Desa::all();
        return view('admin.posyandu.index', compact('puskesmas','desa'));
@@ -66,7 +68,9 @@ class PosyanduController extends Controller
      */
     public function edit(Posyandu $posyandu)
     {
-        //
+        return response()->json([
+            'data'  => $posyandu
+        ]);
     }
 
     /**

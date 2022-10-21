@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->id();
-            $table->string('nik', 16)->nullable();
-            $table->string('nama_anak');
+            $table->char('nik', 16)->nullable();
+            $table->char('nama_anak');
             $table->date('tgl_lahir');
             $table->enum('jk',['Laki-Laki', 'Perempuan']);
-            $table->int('anak_ke',10);
+            $table->char('anak_ke',10);
             $table->double('bb_lahir',10);
             $table->double('pb_lahir',10);
             $table->string('kia');

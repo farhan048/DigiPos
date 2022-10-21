@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('posyandu', function (Blueprint $table) {
             $table->id();
             $table->char('nama_posyandu',50); 
-            $table->char('rt',5)->nullable(); 
+            $table->char('pic',50); 
             $table->char('rw',5); 
             $table->foreignId('id_desa')->constrained('desa');
             $table->foreignId('id_puskesmas')->constrained('puskesmas');

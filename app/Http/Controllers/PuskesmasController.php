@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Puskesmas;
 use App\Models\Desa;
-use Illuminate\Http\Requests\StorePuskesmasRequest;
+use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\StorePuskesmasRequest;
 class PuskesmasController extends Controller
 {
     /**

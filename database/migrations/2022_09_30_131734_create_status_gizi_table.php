@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('status_gizi', function (Blueprint $table) {
-            $table->increments('id_status_gizi');
+            $table->id();
             $table->string('bb_u');
             $table->string('pb_tb_u');
             $table->string('bb_pb_tb');

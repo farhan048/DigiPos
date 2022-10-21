@@ -69,7 +69,25 @@
             { data: 'Puskesmas', name: 'nama_puskesmas'},
             { data: 'alamat', name: 'alamat'},
             { data: 'action', name: 'action', searchable: false, orderable: false}
-            ]
+            ],
+            columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },
+            {
+                "targets": 1,
+                "className": "text-center",
+            },
+            {
+                "targets": 2,
+                "className": "text-center",
+            },
+            {
+                "targets": 3,
+                "className": "text-center",
+            },
+        ]
     })
 </script>
 <script>
